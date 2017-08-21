@@ -1,0 +1,14 @@
+{
+  "name": "ToDo Task",
+  "description": "Be Well Managed.",
+  "version": "1.0",
+  "incognito": "split",
+  "chrome_url_overrides": {
+    "newtab": "templates/index.html"
+  },
+  "manifest_version": 2,
+  "permissions": [
+    "storage",
+    "unlimitedStorage"
+  ]
+}

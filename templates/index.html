@@ -1,0 +1,154 @@
+<html>
+<meta charset="UTF-8">
+
+<head>
+    <title>ToDo Task</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet" type='text/css'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="/static/css/materialize.min.css" media="screen,projection" />
+    <style type="text/css">
+    .task_row {
+        width: 100%;
+    }
+
+    .card-block {
+        padding: 0px;
+    }
+
+    .text-center {
+        width: 100%
+    }
+
+    body {
+        background: url(https://source.unsplash.com/collection/1106046) no-repeat center center fixed;
+        margin: 0 auto;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+
+    .awesome_card {
+        background: linear-gradient(328deg, #327be1, #12db9f);
+    }
+
+    .container {
+        opacity: 0.8;
+    }
+
+    td {
+        vertical-align: middle !important;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container" background="/static/wallpaper-photos-61.jpg">
+        <div class="row" style="margin-top:15px; margin-bottom: 15px;">
+            <!-- Google Search Bar -->
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6">
+                <div class="card awesome_card">
+                    <div class="card-content">
+                        <i class="fa fa-google chip" aria-hidden="true"></i>
+                        <label for="google_search" class="yellow-text">Search on Google</label>
+                        <input type="text" id="google_search" class="active white-text" style="width: 80%; margin: 0px; height: 20px;" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+
+        <div class="row" style="margin-top:15px;">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <div class="card">
+                    <div class="card-panel grey lighten-3 awesome_card" style="margin: 0px;">
+                        <span class="card-title white-text text-darken-4"><b>ToDo List</b></span>
+                        <span class="new badge pull-right yellow black-text badgeTotal" data-badge-caption="Total">0</span>
+                        <span class="new badge pull-right red black-text badgeCancle" data-badge-caption="Cancle">0</span>
+                        <span class="new badge pull-right green black-text badgeDone" data-badge-caption="Done">0</span>
+                        <span class="new badge pull-right blue black-text black-text badgeTodo" data-badge-caption="ToDo">0</span>
+                    </div>
+                    <div class="card-tabs">
+                        <ul class="tabs tabs-fixed-width grey lighten-3 ">
+                            <li class="tab"><a href="#tableTaskDone"><b>Done</b></a></li>
+                            <li class="tab"><a class="active" href="#tableTaskTodo"><b>ToDo</b></a></li>
+                            <li class="tab"><a href="#tableTaskCancle"><b>Cancle</b></a></li>
+                        </ul>
+                    </div>
+                    <div class="card-content">
+                        <table id="tableTaskDone" class="table">
+                            <tr class="task_row">
+                                <td style="width:10%"></td>
+                                <td style="width:5%"></td>
+                                <td><b>#</b></td>
+                                <td class="task_row"><b>Done Task</b></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                        <table id="tableTaskTodo" class="table highlight">
+                            <tr>
+                                <td colspan="5">
+                                    <div class="input-field" id="createTask">
+                                        <a id="addTask" class="addTaskBtn waves-effect waves-light btn-floating green pull-left" style="margin: 5px; display: none;">
+                                            <i class="material-icons">add</i>
+                                        </a>
+                                        <input id="task_name" type="text" class="validate table_task_new_cell col s5" style="margin: 0px;">
+                                        <label for="task_name" class="active">Add Task</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="task_row">
+                                <td style="width:10%"></td>
+                                <td style="width:5%"></td>
+                                <td><b>#</b></td>
+                                <td class="task_row"><b>ToDo Task</b></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                        <table id="tableTaskCancle" class="table">
+                            <tr class="task_row">
+                                <td style="width:10%"></td>
+                                <td style="width:5%"></td>
+                                <td><b>#</b></td>
+                                <td class="task_row"><b>Cancel Task</b></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                        <div class="progress" style="margin: 0px;">
+                            <div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                            </div>
+                            <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                            </div>
+                            <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="fixed-action-btn vertical">
+            <a class="btn-floating btn-large yellow">
+      <i class="material-icons">remove_red_eye</i>
+    </a>
+            <ul>
+                <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
+                <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+                <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
+                <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+            </ul>
+        </div>
+    </div>
+    </div>
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/materialize.min.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/js/anything.js"></script>
+</body>
+
+</html>
