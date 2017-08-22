@@ -1,10 +1,18 @@
 {
   "name": "ToDo Task",
-  "description": "Be Well Managed.",
+  "description": "Be Well Managed. Your Personal Task Management Tool with Always changing Clasic wallpapers and Material UI/UX Design.",
   "version": "1.0",
   "incognito": "split",
   "chrome_url_overrides": {
     "newtab": "templates/index.html"
+  },
+  "icons": {
+    "16": "static/img/16icon.png",
+    "48": "static/img/48icon.png",
+    "128": "static/img/128icon.png"
+  },
+  "browser_action": {
+    "default_icon": "static/img/48icon.png"
   },
   "manifest_version": 2,
   "permissions": [
