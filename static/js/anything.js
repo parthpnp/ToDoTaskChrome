@@ -1,6 +1,6 @@
 list = [];
 counter = 0;
-state = "Todo"
+state = "Todo";
 var storage = chrome.storage.local;
 
 $.fn.makeTodolist = function(str1) { //Model
@@ -10,11 +10,9 @@ $.fn.makeTodolist = function(str1) { //Model
         id: counter,
         text: str1,
         state: state,
-    }
+    };
     list.push(obj);
-    storage.set({
-        list
-    }, function() {
+    storage.set({list}, function() {
         $(this).renderTodoList();
     });
 };
@@ -63,14 +61,14 @@ $.fn.animateBadge = function (end, $el) {
             $el.get(0).innerText = Math.round(this.someValue);
         }
     });
-}
+};
 $.fn.renderTodoList = function() { //View
     if (list) {
         $("#tableTaskTodo tr:gt(1)").remove();
         $("#tableTaskDone tr:gt(0)").remove();
         $("#tableTaskCancle tr:gt(0)").remove();
 
-        for (data of list) {
+        for (var data of list) {
             var table = document.getElementById("tableTask"+data.state);
             //Basic Structure
             var row = table.insertRow();
@@ -80,12 +78,12 @@ $.fn.renderTodoList = function() { //View
             var cell2 = row.insertCell(2);
             var cell3 = row.insertCell(3);
             var cell4 = row.insertCell(4);
-            cell0.innerHTML = "<i class='chip green fa fa-check doneTask' id='" + data['id'] + "'></i>";
-            cell1.innerHTML = "<i class='chip red fa fa-times removeTask' id='" + data['id'] + "'></i>";
-            cell2.innerHTML = data['id'];
-            cell3.innerHTML = data['text'];
+            cell0.innerHTML = "<i class='chip green fa fa-check doneTask' id='" + data.id + "'></i>";
+            cell1.innerHTML = "<i class='chip red fa fa-times removeTask' id='" + data.id + "'></i>";
+            cell2.innerHTML = data.id;
+            cell3.innerHTML = data.text;
             cell3.className = "table_task_cell task_row";
-            cell3.id = data['id'];
+            cell3.id = data.id;
             cell4.innerHTML = "<i class='fa fa-pencil' style='visibility:hidden;'></i>";
 
             if (data.state === 'Done') {
@@ -115,7 +113,43 @@ $.fn.renderCancle = function($el) {
     this.updateProgressBar();
 };
 
+function getLocation() {
+  if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+      return "NA";
+  }
+}
+function showPosition(position) {
+  $.simpleWeather({
+    location: position.coords.latitude +','+ position.coords.longitude,
+    unit: 'c',
+    success: function(weather) {
+      html = '<span class="big-font">'+weather.temp+'&deg;'+weather.units.temp+' <span class="me-font">'+weather.currently+'</span> <span class="sm-font">'+weather.wind.speed+' '+weather.units.speed+'</span></span>';
+      html += '<p>'+weather.city+','+weather.region+'</p>';
+
+      $("#widgetWeather").html(html);
+    },
+    error: function(error) {
+      $("#widgetWeather").html('<p>'+error+'</p>');
+    }
+  });
+}
+
 $(document).ready(function() {
+
+    //Letme Show you your Weather
+    getLocation();
+
+    storage.get('FeatureDiscovery', function(items) {
+        if (!items.FeatureDiscovery) {
+            $('.tap-target').tapTarget('open');
+            var FeatureDiscovery = {
+              "Done": true
+            };
+            storage.set({FeatureDiscovery});
+        }
+    });
     storage.get('list', function(items) {
         if (items.list) {
             list = items.list;
@@ -129,8 +163,8 @@ $(document).ready(function() {
             if (list[val].id === item_id) {
                 if (list[val].state === 'Cancle') {
                     list.splice(val,1);
-                    storage.set({ list });                    
-                    break;                    
+                    storage.set({ list });
+                    break;
                 }
                 list[val].state = 'Cancle';
                 storage.set({ list });
@@ -150,19 +184,19 @@ $(document).ready(function() {
                 break;
             }
         }
-        Materialize.toast('Good Job !', 2500, 'rounded')
+        Materialize.toast('Good Job !', 2500, 'rounded');
         $(this).renderDone($(this));
-        $(this).renderTodoList();        
+        $(this).renderTodoList();
     });
 
     $('#tableTaskTodo').on('click', '.addTaskBtn', function(el) {
         var task_name = $('.table_task_new_cell').val();
         if (task_name.length) {
             $(this).makeTodolist(task_name);
-        };
+        }
         $('.table_task_new_cell').val(' ');
         $('.addTaskBtn').css('display','none');
-        Materialize.toast('Voila ! New Task Created.', 3000, 'rounded')
+        Materialize.toast('Voila ! New Task Created.', 3000, 'rounded');
     });
     $("#tableTaskTodo, #tableTaskDone, #tableTaskCancle").on('focusout', 'tr', function() {
         var $task = $(this).find('.table_task_cell')[0];
@@ -177,7 +211,7 @@ $(document).ready(function() {
                         console.log(task_id);
                     }
                 }
-            }     
+            }
         }
     });
     $("#tableTaskTodo").on('focusin', '.table_task_new_cell', function() {
@@ -193,5 +227,9 @@ $(document).ready(function() {
         if (e.keyCode == 13) {
             window.location.replace('http://google.com/search?q='+$('#google_search').val());
         }
+    });
+
+    $(".page_turn_off").on('click', function(e) {
+        chrome.tabs.update({ url: "chrome-search://local-ntp/local-ntp.html" });
     });
 });

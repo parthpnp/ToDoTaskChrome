@@ -1,0 +1,54 @@
+.task_row {
+    width: 100%;
+}
+
+.card-block {
+    padding: 0px;
+}
+
+.text-center {
+    width: 100%
+}
+
+body {
+    background: url(https://source.unsplash.com/collection/1106046) #E6E7E8 no-repeat center center fixed;
+    margin: 0 auto;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.awesome_card {
+    background: linear-gradient(328deg, #327be1, #12db9f);
+}
+.awesome_card .col-sm-7 {
+  padding: 0px;
+}
+.awesome_card .row {
+  margin-bottom: 5px;
+}
+.weather {
+    color: white;
+}
+.container {
+    opacity: 0.8;
+}
+
+td {
+    vertical-align: middle !important;
+}
+
+.card .card-content {
+  padding: 10px 24px;
+}
+
+.weather .big-font {
+    font-size: xx-large;
+}
+.weather .me-font {
+    font-size: large;
+}
+.weather .sm-font {
+    font-size: small;
+}

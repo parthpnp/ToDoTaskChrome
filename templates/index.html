@@ -9,43 +9,11 @@
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet" type='text/css'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="/static/css/materialize.min.css" media="screen,projection" />
-    <style type="text/css">
-    .task_row {
-        width: 100%;
-    }
-
-    .card-block {
-        padding: 0px;
-    }
-
-    .text-center {
-        width: 100%
-    }
-
-    body {
-        background: url(https://source.unsplash.com/collection/1106046) #E6E7E8 no-repeat center center fixed;
-        margin: 0 auto;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-    }
-
-    .awesome_card {
-        background: linear-gradient(328deg, #327be1, #12db9f);
-    }
-
-    .container {
-        opacity: 0.8;
-    }
-
-    td {
-        vertical-align: middle !important;
-    }
-    </style>
+    <link type="text/css" rel="stylesheet" href="/static/css/style.css"/>
 </head>
 
 <body>
+    <div id="geo"></div>
     <div class="container" background="/static/wallpaper-photos-61.jpg">
         <div class="row" style="margin-top:15px; margin-bottom: 15px;">
             <!-- Google Search Bar -->
@@ -53,9 +21,18 @@
             <div class="col-sm-6">
                 <div class="card awesome_card">
                     <div class="card-content">
+                      <div class="row">
+                        <div class="col-sm-7">
+                          <div id="widgetWeather" class="weather"></div>
+                        </div>
+                        <div class="col-sm-5">
+                          <div id="widgetDateTime" class="dateTime"></div>
+                        </div>
+                      </div>
+                      <div class="row">
                         <i class="fa fa-google chip" aria-hidden="true"></i>
-                        <label for="google_search" class="yellow-text">Search on Google</label>
                         <input type="text" id="google_search" class="active white-text" style="width: 80%; margin: 0px; height: 20px;" />
+                      </div>
                     </div>
                 </div>
             </div>
@@ -131,21 +108,53 @@
                 </div>
             </div>
         </div>
-
         <div class="fixed-action-btn vertical">
-            <a class="btn-floating btn-large yellow">
-      <i class="material-icons">remove_red_eye</i>
-    </a>
-            <ul>
-                <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
-                <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
-                <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
-                <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
-            </ul>
+          <a class="btn-floating btn-large blue" id="o_setting_menu">
+            <i class="material-icons">settings</i>
+          </a>
+          <ul>
+              <li><a class="btn-floating red page_turn_off"><i class="material-icons">remove_red_eye</i></a></li>
+              <li><a class="btn-floating yellow darken-1" data-target="modal1" class="btn modal-trigger"><i class="material-icons">wallpaper</i></a></li>
+          </ul>
         </div>
+
+        <!-- FeatureDiscovery -->
+        <div class="tap-target blue" data-activates="o_setting_menu">
+          <div class="tap-target-content">
+            <h5>All New Setting Options</h5>
+            <p>- Get Wallpaers of your Like</p>
+            <p>- Hide ToDoTask Option</p>
+          </div>
+        </div>
+      <!-- Modal Sheet for wallpaper Choice -->
+      <!-- <div id="modal1" class="modal bottom-sheet">
+        <div class="modal-content">
+          <h4>Modal Header</h4>
+          <p>A bunch of text</p>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+        </div>
+      </div> -->
+
+      <!-- Modal Trigger -->
+  <!-- <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a> -->
+
+  <!-- Modal Structure -->
+  <!-- <div id="modal1" class="modal-something modal-fixed-footer">
+    <div class="modal-content">
+      <h4>Modal Header</h4>
+      <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+    </div>
+  </div> -->
+
     </div>
     </div>
     <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.simpleWeather.min.js"></script>
     <script type="text/javascript" src="/static/js/materialize.min.js"></script>
     <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/static/js/anything.js"></script>
