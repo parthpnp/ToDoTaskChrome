@@ -135,11 +135,16 @@ function showPosition(position) {
     }
   });
 }
+function showDateTime() {
+    html = '<span class="big-font pull-right">'+new Date().toLocaleTimeString('en-US',{ hour12: false})+'</span><br/><span class="me-font pull-right">'+new Date().toLocaleDateString()+'&nbsp;</span>';
+    $("#widgetDateTime").html(html);
+}
 
 $(document).ready(function() {
 
     //Letme Show you your Weather
     getLocation();
+    setTimeout(showDateTime, 1000);
 
     storage.get('FeatureDiscovery', function(items) {
         if (!items.FeatureDiscovery) {
