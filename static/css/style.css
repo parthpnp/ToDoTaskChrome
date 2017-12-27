@@ -52,3 +52,19 @@ td {
 .weather .sm-font {
     font-size: small;
 }
+
+.quote_text{
+    color: white;
+    font-size: xx-large;
+    font-style: italic;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 8px;
+    border-radius: 32px;
+}
+q {
+    quotes: "\201C" "\201D";
+}
+.author_text {
+    color: white;
+    font-size: large;
+}

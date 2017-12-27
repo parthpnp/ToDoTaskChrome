@@ -139,12 +139,20 @@ function showDateTime() {
     html = '<span class="big-font pull-right">'+new Date().toLocaleTimeString('en-US',{ hour12: false})+'</span><br/><span class="me-font pull-right">'+new Date().toLocaleDateString()+'&nbsp;</span>';
     $("#widgetDateTime").html(html);
 }
+function getQOD() {
+    $.get('https://quotes.rest/qod').then(function(res){
+        var content = res.contents.quotes[0];
+        $('.quote_text').html('<q>'+content.quote+'</q>');
+        $('.author_text').html(content.author);
+    });
+}
 
 $(document).ready(function() {
 
     //Letme Show you your Weather
     getLocation();
     setTimeout(showDateTime, 1000);
+    getQOD();
 
     storage.get('FeatureDiscovery', function(items) {
         if (!items.FeatureDiscovery) {
