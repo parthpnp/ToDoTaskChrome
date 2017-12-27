@@ -57,14 +57,23 @@ td {
     color: white;
     font-size: xx-large;
     font-style: italic;
-    background: rgba(0, 0, 0, 0.3);
-    padding: 8px;
-    border-radius: 32px;
+    text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.8);
 }
 q {
     quotes: "\201C" "\201D";
 }
 .author_text {
     color: white;
-    font-size: large;
+    font-size: x-large;
+    text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.8);
+}
+.donate_us {
+    vertical-align: bottom;
+    color: white;
+    cursor: pointer;
+    opacity: 0.8;
+}
+.donate_us:hover {
+    color: #12db9f;
+    text-decoration: none;
 }

@@ -143,7 +143,7 @@ function getQOD() {
     $.get('https://quotes.rest/qod').then(function(res){
         var content = res.contents.quotes[0];
         $('.quote_text').html('<q>'+content.quote+'</q>');
-        $('.author_text').html(content.author);
+        $('.author_text').html('-'+content.author);
     });
 }
 
