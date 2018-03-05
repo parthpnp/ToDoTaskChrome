@@ -20,7 +20,7 @@ $.fn.makeTodolist = function(str1) { //Model
 $.fn.updateProgressBar = function() {
     var done_count = 0;
     var todo_count = 0;
-    var cancle_count = 0;
+    var cancel_count = 0;
     var total_count = 0;
 
     for (var val in list) {
@@ -31,8 +31,8 @@ $.fn.updateProgressBar = function() {
             case 'Done':
                 done_count += 1;
                 break;
-            case 'Cancle':
-                cancle_count += 1;
+            case 'Cancel':
+                cancel_count += 1;
                 break;
             default:
                 continue;
@@ -42,15 +42,15 @@ $.fn.updateProgressBar = function() {
 
     this.animateBadge(todo_count, $('.badgeTodo'));
     this.animateBadge(done_count, $('.badgeDone'));
-    this.animateBadge(cancle_count, $('.badgeCancle'));
+    this.animateBadge(cancel_count, $('.badgeCancel'));
     this.animateBadge(total_count, $('.badgeTotal'));
 
     var $progress_done = $('.progress-bar-success');
     var $progress_todo = $('.progress-bar-primary');
-    var $progress_cancle = $('.progress-bar-danger');
+    var $progress_cancel = $('.progress-bar-danger');
     $progress_done.animate({ width: (done_count / total_count) * 100 + "%" }, 200);
     $progress_todo.animate({ width: (todo_count / total_count) * 100 + "%" }, 200);
-    $progress_cancle.animate({ width: (cancle_count / total_count) * 100 + "%" }, 200);
+    $progress_cancel.animate({ width: (cancel_count / total_count) * 100 + "%" }, 200);
 
 };
 $.fn.animateBadge = function (end, $el) {
@@ -66,7 +66,7 @@ $.fn.renderTodoList = function() { //View
     if (list) {
         $("#tableTaskTodo tr:gt(1)").remove();
         $("#tableTaskDone tr:gt(0)").remove();
-        $("#tableTaskCancle tr:gt(0)").remove();
+        $("#tableTaskCancel tr:gt(0)").remove();
 
         for (var data of list) {
             var table = document.getElementById("tableTask"+data.state);
@@ -88,8 +88,8 @@ $.fn.renderTodoList = function() { //View
 
             if (data.state === 'Done') {
                 this.renderDone($(row));
-            } else if (data.state === 'Cancle') {
-                this.renderCancle($(row));
+            } else if (data.state === 'Cancel') {
+                this.renderCancel($(row));
             }
         }
         this.updateProgressBar();
@@ -105,7 +105,7 @@ $.fn.renderDone = function($el) {
     this.updateProgressBar();
 };
 
-$.fn.renderCancle = function($el) {
+$.fn.renderCancel = function($el) {
     $el.closest('tr').toggleClass('alert-danger strikeout');
     $el.find('.table_task_cell').attr({
         'contenteditable': 'false'
@@ -113,7 +113,7 @@ $.fn.renderCancle = function($el) {
     this.updateProgressBar();
 };
 
-function getLocation() {
+function getWeather() {
   if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition);
   } else {
@@ -146,7 +146,7 @@ function getQOD() {
 $(document).ready(function() {
 
     //Letme Show you your Weather.
-    getLocation();
+    getWeather();
     //Letme Show you Quote of the Day.
     getQOD();
 
@@ -166,21 +166,21 @@ $(document).ready(function() {
         }
         $(this).renderTodoList();
     });
-    $('#tableTaskTodo, #tableTaskDone, #tableTaskCancle').on('click', '.removeTask', function(el) {
+    $('#tableTaskTodo, #tableTaskDone, #tableTaskCancel').on('click', '.removeTask', function(el) {
         var item_id = parseInt($(this).closest('.removeTask').attr('id'));
         for (var val in list) {
             if (list[val].id === item_id) {
-                if (list[val].state === 'Cancle') {
+                if (list[val].state === 'Cancel') {
                     list.splice(val,1);
                     storage.set({ list });
                     break;
                 }
-                list[val].state = 'Cancle';
+                list[val].state = 'Cancel';
                 storage.set({ list });
                 break;
             }
         }
-        $(this).renderCancle($(this));
+        $(this).renderCancel($(this));
         $(this).renderTodoList();
     });
 
@@ -205,9 +205,21 @@ $(document).ready(function() {
         }
         $('.table_task_new_cell').val(' ');
         $('.addTaskBtn').css('display','none');
-        Materialize.toast('Voila ! New Task Created.', 3000, 'rounded');
+        Materialize.toast('Voila! New Task Created.', 3000, 'rounded');
     });
-    $("#tableTaskTodo, #tableTaskDone, #tableTaskCancle").on('focusout', 'tr', function() {
+
+    $('#tableTaskTodo').on('keypress', '#task_name', function(el) {
+        if(el.which === 13) {
+            var task_name = $('.table_task_new_cell').val();
+            if (task_name.length) {
+                $(this).makeTodolist(task_name);
+            }
+            $('.table_task_new_cell').val(' ');
+            $('.addTaskBtn').css('display','none');
+            Materialize.toast('Voila! New Task Created.', 3000, 'rounded');
+        }
+    });
+    $("#tableTaskTodo, #tableTaskDone, #tableTaskCancel").on('focusout', 'tr', function() {
         var $task = $(this).find('.table_task_cell')[0];
         if ($task) {
             var update_task = $task.innerText;
@@ -217,7 +229,6 @@ $(document).ready(function() {
                     if (list[val].id == task_id) {
                         list[val].text = update_task;
                         storage.set({ list });
-                        console.log(task_id);
                     }
                 }
             }

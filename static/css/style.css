@@ -37,6 +37,10 @@ body {
 .container {
     opacity: 0.8;
 }
+span.badge {
+    float: none;
+    margin: 10px 0 0 0px;
+}
 
 td {
     vertical-align: middle !important;

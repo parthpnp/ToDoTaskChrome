@@ -39,16 +39,21 @@
                 <div class="card">
                     <div class="card-panel grey lighten-3 awesome_card" style="margin: 0px;">
                         <span class="card-title white-text text-darken-4"><b>ToDo List</b></span>
-                        <span class="new badge pull-right yellow black-text badgeTotal" data-badge-caption="Total">0</span>
-                        <span class="new badge pull-right red black-text badgeCancle" data-badge-caption="Cancle">0</span>
-                        <span class="new badge pull-right green black-text badgeDone" data-badge-caption="Done">0</span>
-                        <span class="new badge pull-right blue black-text black-text badgeTodo" data-badge-caption="ToDo">0</span>
+                        <span class="new badge pull-right yellow black-text badgeTotal" data-badge-caption="TOTAL">0</span>
                     </div>
                     <div class="card-tabs">
                         <ul class="tabs tabs-fixed-width grey lighten-3 ">
-                            <li class="tab"><a href="#tableTaskDone"><b>Done</b></a></li>
-                            <li class="tab"><a class="active" href="#tableTaskTodo"><b>ToDo</b></a></li>
-                            <li class="tab"><a href="#tableTaskCancle"><b>Cancle</b></a></li>
+                            <li class="tab"><a href="#tableTaskDone">
+                                <span class="new badge green black-text badgeDone" data-badge-caption="Done">0</span>
+                                </a>
+                            </li>
+                            <li class="tab"><a class="active" href="#tableTaskTodo">
+                                <span class="new badge blue black-text black-text badgeTodo" data-badge-caption="ToDo">0</span>
+                            </a></li>
+                            <li class="tab"><a href="#tableTaskCancel">
+                                <span class="new badge red black-text badgeCancel" data-badge-caption="Cancel">0</span>
+                            </a>
+                            </li>
                         </ul>
                     </div>
                     <div class="card-content">
@@ -81,7 +86,7 @@
                                 <td></td>
                             </tr>
                         </table>
-                        <table id="tableTaskCancle" class="table">
+                        <table id="tableTaskCancel" class="table">
                             <tr class="task_row">
                                 <td style="width:10%"></td>
                                 <td style="width:5%"></td>
