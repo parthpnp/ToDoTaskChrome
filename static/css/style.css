@@ -22,8 +22,11 @@ body {
 .awesome_card {
     background: linear-gradient(328deg, #327be1, #12db9f);
 }
+.taskCard {
+    padding:20px;
+}
 .widget_card {
-    min-height: 137px;
+    padding:10px 0px;
 }
 .awesome_card .col-sm-7 {
   padding: 0px;
@@ -34,10 +37,14 @@ body {
 .weather {
     color: white;
 }
+
 .container {
     opacity: 0.8;
 }
-span.badge {
+.container .row {
+    margin-bottom: 0px;
+}
+span.taskTitle {
     float: none;
     margin: 10px 0 0 0px;
 }
@@ -47,7 +54,13 @@ td {
 }
 
 .card .card-content {
-  padding: 10px 24px;
+    padding: 0px 24px;
+    max-height: 330px;
+    overflow-x: auto;
+}
+.tableTaskContent {
+    border-bottom: white solid 10px;
+    border-top: white solid 10px;
 }
 
 .weather .big-font {
